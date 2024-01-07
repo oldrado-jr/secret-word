@@ -1,8 +1,11 @@
 import './styles.css';
 
-function Game() {
+function Game({ verifyLetter }) {
   return (
-    <div>Game</div>
+    <div>
+      <h1>Game</h1>
+      <button type="button" onClick={verifyLetter}>Finalizar jogo</button>
+    </div>
   );
 }
 
