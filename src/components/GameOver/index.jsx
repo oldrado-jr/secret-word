@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './styles.css';
 
 function GameOver({ retry, score }) {
@@ -11,5 +13,10 @@ function GameOver({ retry, score }) {
     </div>
   );
 }
+
+GameOver.propTypes = {
+  retry: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired,
+};
 
 export default GameOver;

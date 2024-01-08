@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.css';
 
@@ -67,5 +68,15 @@ function Game({
     </div>
   );
 }
+
+Game.propTypes = {
+  verifyLetter: PropTypes.func.isRequired,
+  pickedCategory: PropTypes.string.isRequired,
+  letters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  guessedLetters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  wrongLetters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  guesses: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+};
 
 export default Game;

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './styles.css';
 
 function StartScreen({ startGame }) {
@@ -9,5 +11,9 @@ function StartScreen({ startGame }) {
     </div>
   );
 }
+
+StartScreen.propTypes = {
+  startGame: PropTypes.func.isRequired,
+};
 
 export default StartScreen;
