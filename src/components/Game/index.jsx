@@ -1,3 +1,5 @@
+import { useRef, useState } from 'react';
+
 import './styles.css';
 
 function Game({
@@ -10,6 +12,19 @@ function Game({
   guesses,
   score,
 }) {
+  const [letter, setLetter] = useState('');
+  const letterInputRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    verifyLetter(letter);
+
+    setLetter('');
+
+    letterInputRef.current.focus();
+  };
+
   return (
     <div className="game">
       <p className="points">
@@ -31,9 +46,17 @@ function Game({
       </div>
       <div className="letter-container">
         <p>Tente adivinhar uma letra da palavra:</p>
-        <form>
-          <input type="text" name="letter" maxLength="1" required />
-          <button type="button">Jogar!</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="letter"
+            maxLength="1"
+            required
+            onChange={(e) => setLetter(e.target.value)}
+            value={letter}
+            ref={letterInputRef}
+          />
+          <button type="submit">Jogar!</button>
         </form>
         <div className="wrong-letters-container">
           <p>Letras já utilizadas:</p>
