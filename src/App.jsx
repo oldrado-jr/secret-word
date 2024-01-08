@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { wordsList } from './data/words';
 
@@ -15,6 +15,8 @@ function App() {
     { id: 3, name: 'end' },
   ];
 
+  const maxGuesses = 3;
+
   const [gameStage, setGameStage] = useState(stages[0].name);
   const [words] = useState(wordsList);
 
@@ -24,7 +26,7 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
-  const [guesses, setGuesses] = useState(3);
+  const [guesses, setGuesses] = useState(maxGuesses);
   const [score, setScore] = useState(0);
 
   const pickWordAndCategory = () => {
@@ -68,12 +70,30 @@ function App() {
         ...currentWrongLetters,
         normalizedLetter,
       ]);
+
+      setGuesses((currentGuesses) => currentGuesses - 1);
     }
   };
 
   const retry = () => {
+    setScore(0);
+    setGuesses(maxGuesses);
     setGameStage(stages[0].name);
   };
+
+  const clearLetterStates = () => {
+    setGuessedLetters([]);
+    setWrongLetters([]);
+  };
+
+  const endStageName = stages[2].name;
+
+  useEffect(() => {
+    if (guesses <= 0) {
+      clearLetterStates();
+      setGameStage(endStageName);
+    }
+  }, [guesses, endStageName]);
 
   return (
     <>
