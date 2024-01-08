@@ -4,7 +4,6 @@ import './styles.css';
 
 function Game({
   verifyLetter,
-  pickedWord,
   pickedCategory,
   letters,
   guessedLetters,
